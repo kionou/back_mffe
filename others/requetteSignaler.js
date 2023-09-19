@@ -1,17 +1,16 @@
-const Commentaire = require("../models/commentaire")
+const Signaler = require("../models/signaler")
 
 
 
+const Signalerdata = class{
 
-const Commentairedata = class{
-
-    static CommentaireAll=  ()=>{
+    static SignalerAll =  ()=>{
         return new Promise(async (next)=>{
-           Commentaire.find({})
-           .populate('sujet_id','_id titre')
+           Signaler.find({})
+           .populate('commentaire_id','_id contenu')
            .populate('user_id','nom prenom image')
             .then(resultat=>{
-                console.log('commentaire',resultat);
+                console.log('ss',resultat);
                 next({success:resultat})
             }).catch(err=>{
                 console.log("eee",err);
@@ -21,11 +20,11 @@ const Commentairedata = class{
 
     }
    
-    static insertCommentaire=  (into )=>{
+    static insertSignaler=  (into )=>{
        
-        const {contenu,statut,user_id,sujet_id} = into
+        const {contenu,user_id,commentaire_id} = into
         return new Promise(async (next)=>{
-           Commentaire.create({contenu,statut,user_id,sujet_id})
+           Signaler.create({contenu,user_id,commentaire_id})
             .then(resultat=>{
                 console.log('ss',resultat); 
                 next({success:resultat})
@@ -37,11 +36,11 @@ const Commentairedata = class{
 
     }
 
-    static IdbyCommentaire =  (into)=>{
+    static IdbySignaler =  (into)=>{
         console.log('into',into);
         return new Promise(async (next)=>{
-          await Commentaire.findById({_id:into})
-          .populate('sujet_id','_id titre')
+          await Signaler.findById({_id:into})
+          .populate('commentaire_id','_id contenu')
            .populate('user_id','nom prenom image')
             .then(resultat=>{
                 console.log('ssnn',resultat);
@@ -54,10 +53,10 @@ const Commentairedata = class{
 
     }
 
-    static CommentaireDelete=  (into)=>{
+    static SignalerDelete=  (into)=>{
        
         return new Promise(async (next)=>{
-           Commentaire.findOneAndDelete({_id:into})
+           Signaler.findOneAndDelete({_id:into})
             .then(resultat=>{
                 next({success:resultat}) 
             }).catch(err=>{
@@ -68,11 +67,11 @@ const Commentairedata = class{
 
     }
 
-    static CommentaireUpdate=  (into , id)=>{
+    static SignalerUpdate=  (into , id)=>{
 
-        const {contenu,statut,user_id,sujet_id} = into
+        const {contenu,user_id,commentaire_id} = into
         return new Promise(async (next)=>{
-           Commentaire.findByIdAndUpdate(id,{contenu,statut,user_id,sujet_id})
+           Signaler.findByIdAndUpdate(id,{contenu,user_id,commentaire_id})
             .then(resultat=>{
                 console.log('ss',resultat);
                 next({success:resultat})
@@ -88,4 +87,4 @@ const Commentairedata = class{
  
 
 
-module.exports = Commentairedata
+module.exports = Signalerdata

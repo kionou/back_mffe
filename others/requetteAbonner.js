@@ -1,17 +1,18 @@
-const Commentaire = require("../models/commentaire")
+const Abonner = require("../models/abonner")
 
 
 
 
-const Commentairedata = class{
 
-    static CommentaireAll=  ()=>{
+const Abonnerdata = class{
+
+    static AbonnerAll =  ()=>{
         return new Promise(async (next)=>{
-           Commentaire.find({})
-           .populate('sujet_id','_id titre')
-           .populate('user_id','nom prenom image')
+           Abonner.find({})
+           .populate('lambda_id','nom prenom image')
+           .populate('influente_id','nom prenom image')
             .then(resultat=>{
-                console.log('commentaire',resultat);
+                console.log('ss',resultat);
                 next({success:resultat})
             }).catch(err=>{
                 console.log("eee",err);
@@ -21,11 +22,11 @@ const Commentairedata = class{
 
     }
    
-    static insertCommentaire=  (into )=>{
+    static insertAbonner=  (into )=>{
        
-        const {contenu,statut,user_id,sujet_id} = into
+        const {statut,lambda_id,influente_id} = into
         return new Promise(async (next)=>{
-           Commentaire.create({contenu,statut,user_id,sujet_id})
+           Abonner.create({statut,lambda_id,influente_id})
             .then(resultat=>{
                 console.log('ss',resultat); 
                 next({success:resultat})
@@ -37,12 +38,12 @@ const Commentairedata = class{
 
     }
 
-    static IdbyCommentaire =  (into)=>{
+    static IdbyAbonner =  (into)=>{
         console.log('into',into);
         return new Promise(async (next)=>{
-          await Commentaire.findById({_id:into})
-          .populate('sujet_id','_id titre')
-           .populate('user_id','nom prenom image')
+          await Abonner.findById({_id:into})
+          .populate('lambda_id','nom prenom image')
+          .populate('influente_id','nom prenom image')
             .then(resultat=>{
                 console.log('ssnn',resultat);
                 next({success:resultat}) 
@@ -54,10 +55,10 @@ const Commentairedata = class{
 
     }
 
-    static CommentaireDelete=  (into)=>{
+    static AbonnerDelete=  (into)=>{
        
         return new Promise(async (next)=>{
-           Commentaire.findOneAndDelete({_id:into})
+           Abonner.findOneAndDelete({_id:into})
             .then(resultat=>{
                 next({success:resultat}) 
             }).catch(err=>{
@@ -68,11 +69,11 @@ const Commentairedata = class{
 
     }
 
-    static CommentaireUpdate=  (into , id)=>{
+    static AbonnerUpdate=  (into , id)=>{
 
-        const {contenu,statut,user_id,sujet_id} = into
+        const {statut,lambda_id,influente_id} = into
         return new Promise(async (next)=>{
-           Commentaire.findByIdAndUpdate(id,{contenu,statut,user_id,sujet_id})
+           Abonner.findByIdAndUpdate(id,{statut,lambda_id,influente_id})
             .then(resultat=>{
                 console.log('ss',resultat);
                 next({success:resultat})
@@ -88,4 +89,4 @@ const Commentairedata = class{
  
 
 
-module.exports = Commentairedata
+module.exports = Abonnerdata

@@ -21,10 +21,8 @@ var usersRouter = require('./routes/users');
 var sujetRouter = require('./routes/sujet');
 var CentreRouter = require('./routes/centre');
 var CommentaireRouter = require('./routes/commentaire');
-
-
-
-
+var SignalerRouter = require('./routes/signaler');
+var AbonnerRouter = require('./routes/abonner');
 
 
 mongoose.connect(process.env.MONGO_URL)
@@ -50,6 +48,10 @@ app.use('/api/users', usersRouter);
 app.use('/api/sujet', sujetRouter);
 app.use('/api/centre', CentreRouter);
 app.use('/api/commentaire', CommentaireRouter);
+app.use('/api/signaler', SignalerRouter);
+app.use('/api/abonner', AbonnerRouter);
+
+
 
 
 

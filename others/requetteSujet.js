@@ -8,7 +8,7 @@ const Sujetdata = class{
         return new Promise(async (next)=>{
             Sujet.find({})
             .populate('centre_id','nom')
-            .populate('user_id','nom prenom image')
+             .populate('user_id','nom prenom image')
             
 
             .then(resultat=>{

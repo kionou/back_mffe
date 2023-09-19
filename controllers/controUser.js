@@ -102,7 +102,7 @@ const UserControler = class {
     static UserAll = async (req = request, res = response) => {
         const user = await Userdata.UserAll( )
         if (user.success) {
-            res.status(201).json({ "message": user.success })
+            res.status(201).json({"status":"success", "data": user.success })
         }else{
             res.status(404).json({ "error": "page non disponible" })
         }

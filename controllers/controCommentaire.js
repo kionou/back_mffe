@@ -10,6 +10,7 @@ const dataCommentaire = class{
 
         const Commentaire  = await Commentairedata.CommentaireAll()
         if (Commentaire.success) {
+            console.log('commentare',Commentaire.success);
        
             res.status(201).json({"statut":"success" , "data":Commentaire .success})
         } else {
