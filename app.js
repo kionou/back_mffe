@@ -23,6 +23,7 @@ var CentreRouter = require('./routes/centre');
 var CommentaireRouter = require('./routes/commentaire');
 var SignalerRouter = require('./routes/signaler');
 var AbonnerRouter = require('./routes/abonner');
+var ChatRouter = require('./routes/chat');
 
 
 mongoose.connect(process.env.MONGO_URL)
@@ -50,6 +51,7 @@ app.use('/api/centre', CentreRouter);
 app.use('/api/commentaire', CommentaireRouter);
 app.use('/api/signaler', SignalerRouter);
 app.use('/api/abonner', AbonnerRouter);
+app.use('/api/chat', ChatRouter);
 
 
 
@@ -67,23 +69,25 @@ const io = new Server(httpServer,
     methods: ["GET", "POST"],
     credentials: true,
 }});
-// let sujet= io.of("/api/sujet/1");
-// sujet.on("connection", (socket) => {
-//  console.log("a user connected" );
-//  socket.on('nouveau_sujet',async  (sujetEnAttente)=>{
-//   console.log("sujetEnAttente", sujetEnAttente);
-//    const Sujet = await Sujetdata.insertSujet(sujetEnAttente)
-//     if (Sujet.success) {
-//         // res.status(201).send({"message":"sujet enregistrer"})
-//        socket.emit('message_influenceur', "sujet enregistrer");
-//     } else {
-        // const error = handlErrors(Sujet.erreur)
-        // res.status(400).json({"alert":error})
-//     }
+let sujet= io.of("/api/chat/1");
+sujet.on("connection", (socket) => {
+ console.log("a user connected" );
+ socket.on('nouveau_sujet',async  (sujetEnAttente)=>{
+  console.log("sujetEnAttente", sujetEnAttente);
+  socket.emit('message_influenceur', sujetEnAttente);
 
-// });
+  //  const Sujet = await Sujetdata.insertSujet(sujetEnAttente)
+  //   if (Sujet.success) {
+  //       // res.status(201).send({"message":"sujet enregistrer"})
+  //      socket.emit('message_influenceur', "sujet enregistrer");
+  //   } else {
+  //       const error = handlErrors(Sujet.erreur)
+  //       res.status(400).json({"alert":error})
+  //   }
 
-// });
+});
+
+});
 
 // let sujetAll= io.of("/api/sujet");
 // sujetAll.on("connection", async (socket) => {
