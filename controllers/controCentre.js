@@ -58,8 +58,9 @@ static DeleteCentre = async (req =request,res =response)=>{
 const Centre = await Centredata.CentreDelete(req.params.id)
 if (Centre.success) {
     console.log('erzarete',Centre.success);
+    res.status(201).send({"statut":"success" ,"message":"centre delete avec success "})
 
-    res.status(201).send({"message":"centre delete avec success"})
+   
 } else {
     const error = handlErrors(Centre.erreur)
     res.status(400).json({"alert":error})
@@ -73,10 +74,10 @@ const Centre = await Centredata.CentreUpdate(req.body, req.params.id)
 if (Centre.success) {
     console.log('erzarete',Centre.success);
 
-    res.status(201).send({"message":"centre update avec success"})
+    res.status(201).send({"statut":"success" ,"message":"Centre "})
 } else {
     const error = handlErrors(Centre.erreur)
-    res.status(400).json({"alert":error})
+    res.status(400).json({"statut":"error" ,"alert":error})
 }
 
 }
