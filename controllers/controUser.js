@@ -149,6 +149,7 @@ const UserControler = class {
     console.log('UUUU',req.file);
     const user = await Userdata.UserUpdatePicture(req.file.path, req.params.id)
     if (user.success) {
+        
        res.status(201).send({ "message": "picture user update avec success" })
     } else {
          console.log('ededede', user.erreur);
@@ -164,7 +165,7 @@ const UserControler = class {
         const user = await Userdata.UserDelete(req.params.id)
         if (user.success) {
 
-            res.status(201).send({ "message": "user delete avec success" })
+            res.status(201).json({ 'statut':'success' , 'message ': "user delete avec success"  })
         } else {
             console.log('ededede', user.erreur);
             const error = handlErrors(user.erreur)
