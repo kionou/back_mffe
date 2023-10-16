@@ -24,9 +24,9 @@ const Sujetdata = class{
    
     static insertSujet=  (into )=>{
        
-        const {titre,contenu,statut,user_id,centre_id} = into
+        const {titre,contenu,statut,user_id,centre_id , autreCentre} = into
         return new Promise(async (next)=>{
-            Sujet.create({titre,contenu,statut,user_id,centre_id})
+            Sujet.create({titre,contenu,statut,user_id,centre_id , autreCentre})
             .then(resultat=>{
                 console.log('ss',resultat); 
                 next({success:resultat})
@@ -71,9 +71,9 @@ const Sujetdata = class{
 
     static SujetUpdate=  (into , id)=>{
 
-        const {titre,contenu,statut,user_id,centre_id} = into
+        const {titre,contenu,statut,user_id,centre_id, autreCentre} = into
         return new Promise(async (next)=>{
-            Sujet.findByIdAndUpdate(id,{titre,contenu,statut,user_id,centre_id})
+            Sujet.findByIdAndUpdate(id,{titre,contenu,statut,user_id,centre_id , autreCentre})
             .then(resultat=>{
                 console.log('ss',resultat);
                 next({success:resultat})

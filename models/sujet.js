@@ -17,6 +17,10 @@ const sujetSchema = new mongoose.Schema({
         // required: true,
         default: null,
     },
+    autreCentre:{
+        type:String,
+        default: null,
+    },
     user_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',

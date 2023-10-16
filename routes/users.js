@@ -12,7 +12,7 @@ router.get('/all-users',UserControler.UserAll);
 router.get('/:id', UserControler.UserOne);
 router.post('/sign-up-user',UserControler.Login);
 router.put('/:id',UserControler.UpdateUser);
-router.put('/photo/:id',upload.single('image'),UserControler.UpdateUserPicture);
+router.post('/photo/:id',upload.single('image'),UserControler.UpdateUserPicture);
 router.delete('/:id',UserControler.DeleteUser);
 
 
